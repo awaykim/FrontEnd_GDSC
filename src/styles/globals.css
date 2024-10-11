@@ -4,12 +4,12 @@
 
 /* Global CSS 파일에 font-face 설정 */
 @font-face {
-  font-family: "Changwon";
-  src: url("/public/fonts/ChangwonDangam.otf");
+  font-family: 'Changwon';
+  src: url("/fonts/ChangwonDangam.otf");
 }
 @font-face {
-  font-family: "Hakyo";
-  src: url("/public/fonts/Hakgyoansim.otf");
+  font-family: 'Hakyo';
+  src: url("/fonts/Hakgyoansim.otf");
 }
 
 body {
