@@ -1,13 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
 
-const LetterForm = ({ setUserName }) => {
+interface LetterFormProps {
+    setUserName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const LetterForm = ({ setUserName }: LetterFormProps) => {
     const [showForm, setShowForm] = useState(true);
     const [toName, setToName] = useState("");
-    const [fromName, setFromName] = useState(""); 
+    const [fromName, setFromName] = useState("");
     const [message, setMessage] = useState("");
 
-    const handleLetterSubmit = async (e) => {
+    const handleLetterSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const data = {
             toName,

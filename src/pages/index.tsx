@@ -1,17 +1,24 @@
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MessageBox from "@/components/MessageBox";
 import LetterForm from "@/components/LetterForm";
 
-export default function Home() {
-    const [isFormVisible, setIsFormVisible] = useState(false);
-    const [messages, setMessages] = useState([]);
-    const [userName, setUserName] = useState("");
+interface Message {
+    toName: string;
+    fromName: string;
+    message: string;
+}
+
+const Home = () => {
+    const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [userName, setUserName] = useState<string>("");
 
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await axios.get(
+                const response = await axios.get<Message[]>(
                     `http://ec2-3-38-49-253.ap-northeast-2.compute.amazonaws.com:8080/messages?name=${userName}`
                 );
                 setMessages(response.data);
@@ -62,3 +69,5 @@ export default function Home() {
         </>
     );
 }
+
+export default Home
