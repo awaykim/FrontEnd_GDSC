@@ -1,6 +1,18 @@
 import Image from "next/image";
 
 const Header = () => {
+
+    const handleGoogleLogin = () => {
+        const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+        const clientId = "YOUR_GOOGLE_CLIENT_ID"; 
+        const redirectUri = "http://localhost:3000/oauth/callback/google"; 
+        const scope = "profile email";
+        const responseType = "code";
+
+        const authUrl = `${googleAuthUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
+        window.location.href = authUrl;
+    };
+
     return (
         <div className="bg-[#A60606] w-full h-[50px] flex items-center justify-between px-7">
             <p className="text-white font-['Changwon']">💌 연말 편지 우체통</p>
