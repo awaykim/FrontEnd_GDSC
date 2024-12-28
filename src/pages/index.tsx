@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MessageBox from "@/components/MessageBox";
 import LetterForm from "@/components/LetterForm";
+import Cookies from "js-cookie";
 
 interface Message {
     toName: string;
@@ -16,12 +16,20 @@ const Home = () => {
     const [userName, setUserName] = useState<string>("");
 
     useEffect(() => {
+        const name = Cookies.get("name"); 
+        if (name) {
+            setUserName(name); 
+        }
+    }, []);
+
+    useEffect(() => {
         const fetchMessages = async () => {
             try {
                 const response = await axios.get<Message[]>(
                     `http://ec2-3-38-49-253.ap-northeast-2.compute.amazonaws.com:8080/messages?name=${userName}`
                 );
                 setMessages(response.data);
+                console.log(messages[0]);
             } catch (error) {
                 console.error("Error fetching messages:", error);
             }
@@ -68,6 +76,6 @@ const Home = () => {
             </div>
         </>
     );
-}
+};
 
-export default Home
+export default Home;
