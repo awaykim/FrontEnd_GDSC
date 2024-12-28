@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const GoogleCallback = () => {
     const router = useRouter();
-    
+
     useEffect(() => {
         console.log("Router Query:", router.query);
         const { code } = router.query;
@@ -19,6 +20,11 @@ const GoogleCallback = () => {
                     document.cookie = `access_token=${access_token}; path=/`;
 
                     localStorage.setItem("access_token", access_token);
+
+                    Cookies.set("accessToken", access_token, {
+                        expires: 1,
+                    });
+                    Cookies.set("name", name, { expires: 1 });
 
                     router.push("/");
                 } catch (error) {
